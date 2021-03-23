@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lexing.sys.mapper.UserMapper">
+    <resultMap id="resultMap" type="com.lexing.sys.model.User">
+        <id column="c_id" jdbcType="BIGINT" property="id"/>
+        <result column="c_name" jdbcType="VARCHAR" property="name"/>
+        <result column="c_sex" jdbcType="INTEGER" property="sex"/>
+        <result column="c_phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="c_nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="c_wchat_head" jdbcType="VARCHAR" property="wchatHead"/>
+        <result column="c_wchat_open_id" jdbcType="VARCHAR" property="wchatOpenId"/>
+        <result column="c_wchat_union_id" jdbcType="VARCHAR" property="wchatUnionid"/>
+        <result column="c_password" jdbcType="VARCHAR" property="password"/>
+        <result column="c_bind" jdbcType="INTEGER" property="bind"/>      
+    </resultMap>
+
+    <sql id="allColumns">
+    	c_name,
+    	c_sex,
+    	c_phone,
+    	c_nickname,
+    	c_wchat_head,
+    	c_wchat_open_id,
+    	c_wchat_union_id,
+    	c_password,
+    	c_bind    	
+    </sql>
+
+    <select id="getById" parameterType="java.lang.Long" resultMap="resultMap">
+        select c_id,
+        <include refid="allColumns"/>
+        from t_user
+        where c_id = #{id,jdbcType=BIGINT} and c_property = 0
+    </select>
+
+    <select id="getUserByOpenId" parameterType="java.lang.String" resultMap="resultMap">
+        select c_id,
+        <include refid="allColumns"/>
+        from t_user
+        where c_wchat_open_id = #{openId,jdbcType=VARCHAR} and c_property = 0
+    </select>
+    
+    <update id="update" parameterType="com.lexing.sys.model.User">
+        update t_user
+        <set>
+            c_name = #{name,jdbcType=VARCHAR},
+            c_sex = #{sex,jdbcType=INTEGER},
+            c_phone = #{phone,jdbcType=VARCHAR},
+            c_nickname = #{nickname,jdbcType=VARCHAR},
+            c_wchat_head = #{wchatHead,jdbcType=VARCHAR},
+            c_wchat_open_id = #{wchatOpenId,jdbcType=VARCHAR},
+            c_password = #{password,jdbcType=VARCHAR},
+            c_bind = #{bind,jdbcType=INTEGER}
+        </set>
+        where c_id = #{id,jdbcType=BIGINT} and c_property = 0
+    </update>
+    
+</mapper>

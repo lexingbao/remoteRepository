@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lexing.sys.mapper.NodeInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lexing.sys.model.NodeInfo">
+    <id column="c_id" jdbcType="BIGINT" property="id" />
+    <result column="c_node_code" jdbcType="VARCHAR" property="nodeCode" />
+    <result column="c_node_name" jdbcType="VARCHAR" property="nodeName" />
+    <result column="c_node_order" jdbcType="INTEGER" property="nodeOrder" />
+    <result column="c_node_type" jdbcType="VARCHAR" property="nodeType" />
+    <result column="c_type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="c_remark" jdbcType="VARCHAR" property="remark" />
+    <result column="c_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="c_modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="c_create_user" jdbcType="CHAR" property="createUser" />
+    <result column="c_modify_user" jdbcType="CHAR" property="modifyUser" />
+    <result column="c_property" jdbcType="INTEGER" property="property" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    c_id, c_node_code, c_node_name, c_node_order, c_node_type, c_type_name, c_remark, 
+    c_create_time, c_modify_time, c_create_user, c_modify_user, c_property
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_node_info
+    where c_id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_node_info
+    where c_id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lexing.sys.model.NodeInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_node_info (c_node_code, c_node_name, c_node_order, 
+      c_node_type, c_type_name, c_remark, 
+      c_create_time, c_modify_time, c_create_user, 
+      c_modify_user, c_property)
+    values (#{nodeCode,jdbcType=VARCHAR}, #{nodeName,jdbcType=VARCHAR}, #{nodeOrder,jdbcType=INTEGER}, 
+      #{nodeType,jdbcType=VARCHAR}, #{typeName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=CHAR}, 
+      #{modifyUser,jdbcType=CHAR}, #{property,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lexing.sys.model.NodeInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_node_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nodeCode != null">
+        c_node_code,
+      </if>
+      <if test="nodeName != null">
+        c_node_name,
+      </if>
+      <if test="nodeOrder != null">
+        c_node_order,
+      </if>
+      <if test="nodeType != null">
+        c_node_type,
+      </if>
+      <if test="typeName != null">
+        c_type_name,
+      </if>
+      <if test="remark != null">
+        c_remark,
+      </if>
+      <if test="createTime != null">
+        c_create_time,
+      </if>
+      <if test="modifyTime != null">
+        c_modify_time,
+      </if>
+      <if test="createUser != null">
+        c_create_user,
+      </if>
+      <if test="modifyUser != null">
+        c_modify_user,
+      </if>
+      <if test="property != null">
+        c_property,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nodeCode != null">
+        #{nodeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeName != null">
+        #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeOrder != null">
+        #{nodeOrder,jdbcType=INTEGER},
+      </if>
+      <if test="nodeType != null">
+        #{nodeType,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null">
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=CHAR},
+      </if>
+      <if test="property != null">
+        #{property,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lexing.sys.model.NodeInfo">
+    update t_node_info
+    <set>
+      <if test="nodeCode != null">
+        c_node_code = #{nodeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeName != null">
+        c_node_name = #{nodeName,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeOrder != null">
+        c_node_order = #{nodeOrder,jdbcType=INTEGER},
+      </if>
+      <if test="nodeType != null">
+        c_node_type = #{nodeType,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null">
+        c_type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        c_remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        c_create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        c_modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        c_create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="modifyUser != null">
+        c_modify_user = #{modifyUser,jdbcType=CHAR},
+      </if>
+      <if test="property != null">
+        c_property = #{property,jdbcType=INTEGER},
+      </if>
+    </set>
+    where c_id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lexing.sys.model.NodeInfo">
+    update t_node_info
+    set c_node_code = #{nodeCode,jdbcType=VARCHAR},
+      c_node_name = #{nodeName,jdbcType=VARCHAR},
+      c_node_order = #{nodeOrder,jdbcType=INTEGER},
+      c_node_type = #{nodeType,jdbcType=VARCHAR},
+      c_type_name = #{typeName,jdbcType=VARCHAR},
+      c_remark = #{remark,jdbcType=VARCHAR},
+      c_create_time = #{createTime,jdbcType=TIMESTAMP},
+      c_modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      c_create_user = #{createUser,jdbcType=CHAR},
+      c_modify_user = #{modifyUser,jdbcType=CHAR},
+      c_property = #{property,jdbcType=INTEGER}
+    where c_id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getNodeInfoByKey" parameterType="String" resultType="com.lexing.sys.model.NodeInfo">
+		SELECT
+				c_node_code "nodeCode",
+				c_node_name "nodeName"
+		 FROM t_node_info
+		WHERE c_property = 0
+		<if test="keys != null">
+			AND c_node_code IN
+			<foreach close=")" collection="keys" item="key" open="(" separator=",">
+				#{key,jdbcType=VARCHAR}
+			</foreach>
+		</if>
+	</select>
+  <select id="getNodeInfoByType" parameterType="String" resultType="com.lexing.sys.model.NodeInfo">
+    SELECT
+           c_node_code "nodeCode",
+           c_node_name "nodeName",
+           c_node_order "nodeOrder"
+    FROM t_node_info
+    WHERE c_property = 0
+    <if test="type != null and type != ''">
+      AND c_node_type = #{type,jdbcType=VARCHAR}
+    </if>
+    ORDER BY c_node_order
+  </select>
+</mapper>

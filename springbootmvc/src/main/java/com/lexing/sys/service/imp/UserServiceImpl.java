@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
     			}
     			
     		}else {
-    			System.out.println((new Date()) +"kkkkkkkkkkkkkkkkk+获取不到");
+    			//System.out.println((new Date()) +"kkkkkkkkkkkkkkkkk+获取不到");
     		}
     		
     		

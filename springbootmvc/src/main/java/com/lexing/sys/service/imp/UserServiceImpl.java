@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 	 * unless 条件符合 不进行缓存  不符合进行缓存
 	 */
 	
-	@CachePut(value="UserModel", key="myuser" ) 
+	//@CachePut(value="UserModel", key="myuser" ) 
     @Override
     public User getByOpenId(String openId) {
         if (openId==null || openId.equals("")) {

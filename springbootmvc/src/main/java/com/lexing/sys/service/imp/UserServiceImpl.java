@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
     public void testCache() {
     	System.out.println((new Date()) +"start test Cache");
     	try{
-    		Thread.sleep(61000);
+    		//Thread.sleep(61000);
     		boolean bl = redisUtils.hasKey("user0002");
     		if(bl==true) {
     			System.out.println((new Date()) +"kkkkkkkkkkkkkkkkk+存在");
